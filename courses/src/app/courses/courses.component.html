@@ -1,29 +1,40 @@
 <div class="">
     <app-search></app-search>
+    <app-filter
+    [all]="getCourses()"
+    [free]="getFreeCourses()"
+    [premium]="getPremiumCourses()"
+    (filterChanged)="onFilterChanged($event)"></app-filter>
 </div>
-<div class="course-container" *ngFor="let course of courses">
-    <div class="course-card">
 
-        <div class="card-img">
-            <img [src]="course.image" alt="Card image " style="width: 220px; height:140px">
+<ng-container *ngFor="let course of courses">
+    <div class="course-container" *ngIf = "courseCountRadioBtn === 'All' || courseCountRadioBtn === course.type" >
+        <div class="course-card">
+            <div class="card-img">
+                <img [src]="course.image" alt="Card image " style="width: 220px; height:140px">
+            </div>
+    
+            <div class="card-main">
+                <h4 class="card-title">{{ course.title }}</h4>
+                <p class="card-description">{{ course.description.slice(0,30)}}...</p>
+    
+            </div>
+    
+            <div class="card-details">
+                <div class="course-type" [ngStyle]="{color: course.type == 'free' ? 'green' : 'red'}">{{course.type}}</div>
+                <div class="course-price"><b>Price:</b> {{ course.price }}</div>
+            </div>
+    
+            <div class="card-buttons">
+                <button class="card-btn btn-buy">Buy now</button>
+                <button class="card-btn  btn-details">Show details</button>
+            </div>
+    
         </div>
-
-        <div class="card-main">
-            <h4 class="card-title">{{ course.title }}</h4>
-            <p class="card-description">{{ course.description.slice(0,30)}}...</p>
-
-        </div>
-
-        <div class="card-details">
-            <div class="course-type" [ngStyle]="{color: course.type == 'free' ? 'green' : 'red'}">{{course.type}}</div>
-            <div class="course-price"><b>Price:</b> {{ course.price }}</div>
-        </div>
-
-        <div class="card-buttons">
-            <button class="card-btn btn-buy">Buy now</button>
-            <button class="card-btn  btn-details">Show details</button>
-        </div>
-
     </div>
 
-</div>
+
+
+</ng-container>
+
+
