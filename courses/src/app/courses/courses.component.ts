@@ -27,6 +27,7 @@ export class CoursesComponent {
   ]
 
   courseCountRadioBtn: string = 'All';
+  searchText: string = '';
 
   getCourses() {
     return this.courses.length;
@@ -42,6 +43,10 @@ export class CoursesComponent {
 
   onFilterChanged(data: string) {
     this.courseCountRadioBtn = data;
+  }
+
+  onSearchTextChanged(data: string) {
+    this.searchText = data;
   }
 
 }
